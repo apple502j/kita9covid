@@ -1,0 +1,42 @@
+<html lang="ja" dir="ltr">
+    <head>
+        <meta charset="utf-8" />
+        <title>COVID-19 北九州 詳細ページ</title>
+        <script type="module" src="./details.js"></script>
+        <style>
+            [hidden] {
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="loading">読み込み中...</div>
+        <div class="loaded" hidden>
+            <h1>No. <span class="insert_id"></span>の詳細</h1>
+            <h2>基礎情報</h2>
+            <p>
+                <span class="insert_location" data-suffix="在住" data-default="住所不明"></span>
+                <span class="insert_job" data-default="職業不明"></span>の
+                <span class="insert_age" data-suffix="歳代" data-default="年齢不詳"></span>
+                <span class="insert_gender" data-default=""></span>
+            </p>
+            <p>
+                公表<time class="insert_shared" data-default="日時不明"></time>
+                発症<time class="insert_onset" data-default="日時不明"></time>
+            </p>
+            <p>
+                <span class="insert_status" data-default=""></span>
+                <span class="insert_symptom" data-default=""></span>
+                海外渡航歴<span class="insert_has_traveled" data-yes="あり" data-no="なし" data-default="不明"></span>
+                <span class="insert_has_left_hospital" data-yes="退院済" data-no="" data-default=""></span>
+            </p>
+            <h2>濃厚接触者</h2>
+            <h3>発症後接触患者</h3>
+            <ul class="map_touching"></ul>
+            <p class="no_touching" hidden data-none="発症後接触患者なし" data-default="発症後接触患者不明"></p>
+            <h3>発症前接触患者</h3>
+            <ul class="map_touched_by"></ul>
+            <p class="no_touched_by" hidden data-none="発症前接触患者なし" data-default="発症前接触患者不明"></p>
+        </div>
+    </body>
+</html>
