@@ -83,7 +83,7 @@ const addLinkListToClass = (className, linkObj, toShow) => Array.from(
 
 const makeLinkFromIds = ids => ids && Object.fromEntries(ids.map(id => [`No. ${id}`, `./details.html?id=${id-1}`]));
 
-fetchJSON('info').then(patientsInfo => {
+fetchJSON('./info').then(patientsInfo => {
     if (!patientsInfo[id]) return handleNotFound();
     const val = patientsInfo[id];
     const has_left_hospital = val.status === '死亡' ? null : val.has_left_hospital;
