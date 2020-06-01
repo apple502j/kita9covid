@@ -73,7 +73,7 @@ const getTree = (patientsInfo, id, usedIDs) => {
         ).filter(i => i && i.children);
     }
     usedIDs.pop();
-    const age = patientInfo.age === null ? '年齢不詳' : `${patientInfo.approx_age}歳代`;
+    const age = patientInfo.approx_age === null ? '年齢不詳' : `${patientInfo.approx_age}歳代`;
     return {
         text: {
             name: {
