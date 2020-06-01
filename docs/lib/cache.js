@@ -26,30 +26,36 @@ LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
 OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-import fetchJSON from './lib/fetch-json.js';
-import getId from './lib/get-id.js';
-import cache from './lib/cache.js';
-import {changeClassVisibility, useAttrAsContent, addContentToClass} from './lib/dom-helper.js';
 
-const showError = () => useAttrAsContent('error', 'error');
-const hideError = () => useAttrAsContent('error', 'normal');
+class CacheHandler {
+    constructor () {
+        this._cache = new Map();
+    }
 
-document.getElementById('showButton').addEventListener('click', () => {
-    const val = document.getElementById('patientID').value;
-    const id = getId(val);
-    changeClassVisibility('info', true);
-    if (id === null) return showError();
-    cache.useAsync('info', () => fetchJSON('./info')).then(patientsInfo => {
-        hideError();
-        const data = patientsInfo[id];
-        if (!data) return showError();
-        changeClassVisibility('info', false);
-        addContentToClass('insert_id', id + 1);
-        addContentToClass('insert_age', data.approx_age);
-        addContentToClass('insert_location', data.location);
-        addContentToClass('insert_job', data.job);
-        addContentToClass('insert_gender', data.gender);
+    reset () {
+        this._cache.clear();
+    }
 
-        document.getElementById('showDetailsLink').href = `./details.html?id=${id}`;
-    });
-});
+    use (name, fetcher) {
+        if (this._cache.has(name)) return this._cache.get(name);
+        const value = fetcher();
+        this._cache.set(name, value);
+        return value;
+    }
+
+    useAsync (name, fetcher) {
+        if (this._cache.has(name)) return new Promise(resolve => resolve(this._cache.get(name)));
+        return fetcher().then(value => {
+            this._cache.set(name, value);
+            return value;
+        });
+    }
+
+    delete (name) {
+        return this._cache.delete(name);
+    }
+}
+
+const globalCacheHandler = new CacheHandler();
+
+export default globalCacheHandler;

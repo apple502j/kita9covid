@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js" defer></script>
+        <script src="./treant/vendor/raphael.js" defer></script>
+        <script src="./treant/Treant.js" defer></script>
+        <link rel="stylesheet" href="./treant/Treant.css">
+        <script type="module" src="./tree.js"></script>
+        <style>
+            [hidden] {
+                display: none;
+            }
+            .tree {
+                width: 90%;
+                height: 700px;
+            }
+        </style>
+        <title>COVID-19 北九州 感染者ツリー</title>
+    </head>
+    <body>
+        <main>
+            <h2>感染者情報</h2>
+            <div class="id_input">
+                <p>以下に感染者番号を入力してください。</p>
+                <p>
+                    <input name="patientID" id="patientID" type="text" placeholder="番号をここに入力">
+                    <button id="showButton">表示</button>
+                </p>
+                <p class="error" data-error="存在しない感染者番号です。" data-normal=""></p>
+            </div>
+            <div class="tree" id="tree" hidden></div>
+        </main>
+        <footer>
+            <p>
+                <a href="./index.html">戻る</a>
+                <a href="./credits.html">クレジット</a>
+            </p>
+            <p>このウェブサイトは暇人が趣味で作ったもので、北九州市の公式のものではありません。問い合わせは @apple502j on GitHubまで</p>
+        </footer>
+    </body>
+</html>
