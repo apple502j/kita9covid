@@ -4,6 +4,7 @@ SET param=%1
 IF /I "%param%" EQU "build" GOTO :build
 IF /I "%param%" EQU "start" GOTO :start
 IF /I "%param%" EQU "touch" GOTO :touch
+IF /I "%param%" EQU "optimize" GOTO :optimize
 EXIT /B 1
 
 REM build

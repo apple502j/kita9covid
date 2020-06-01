@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <!-- core-js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.6.11/core.min.js" defer></script>
+        <script type="module" src="./index.js"></script>
+        <style>
+            [hidden] {
+                display: none;
+            }
+        </style>
+        <title>COVID-19 北九州</title>
+    </head>
+    <body>
+        <h1>COVID-19 北九州</h1>
+        <p>暇人が勝手に作った北九州市のCOVID-19情報サイト。</p>
+
+        <main>
+            <h2>感染者情報</h2>
+            <p>以下に感染者番号を入力してください。</p>
+            <p>
+                <input name="patientID" id="patientID" type="text" placeholder="番号をここに入力">
+                <button id="showButton">表示</button>
+            </p>
+            <p class="error" data-error="存在しない感染者番号です。" data-normal=""></p>
+            <div class="info" hidden>
+                <p>概要:
+                    <span class="insert_id" data-prefix="No. "></span>
+                    <span class="insert_location" data-suffix="在住" data-default="住所不明"></span>
+                    <span class="insert_job" data-default="職業不明"></span>の
+                    <span class="insert_age" data-suffix="歳代" data-default="年齢不詳"></span>
+                    <span class="insert_gender" data-default=""></span>
+                </p>
+                <p>
+                    <a href="" id="showDetailsLink">詳細を見る</a>
+                </p>
+            </div>
+        </main>
+        <footer>
+            <p>
+                <a href="./credits.html">クレジット</a>
+                <p>このウェブサイトは暇人が趣味で作ったもので、北九州市の公式のものではありません。問い合わせは @apple502j on GitHubまで</p>
+            </p>
+        </footer>
+    </body>
+</html>

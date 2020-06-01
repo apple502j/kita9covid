@@ -26,20 +26,34 @@ LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
 OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-export default stringId => {
-    let id = stringId;
-    let shouldDecrement = false;
-    if (typeof stringId === 'undefined') {
-        const url = new URL(location.href);
-        id = url.searchParams.get("id");
-    } else {
-        // stringId is 1-indexed
-        shouldDecrement = true;
+const changeClassVisibility = (className, hidden) => Array.from(
+    document.getElementsByClassName(className)
+).forEach(node => node.hidden = !!hidden);
+
+const showContent = (toHide, toShow) => {
+    changeClassVisibility(toHide, true);
+    changeClassVisibility(toShow, false);
+};
+
+const useAttrAsContent = (className, attr) => Array.from(
+    document.getElementsByClassName(className)
+).forEach(node => node.textContent = node.dataset[attr]);
+
+const addContentToClass = (className, value) => Array.from(
+    document.getElementsByClassName(className)
+).forEach(node => {
+    if (value === null && node.dataset.hasOwnProperty('default')) {
+        node.textContent = node.dataset.default;
+        return;
     }
-    if (id) {
-        const numberId = parseInt(id);
-        if (Number.isNaN(numberId) || numberId < 0) return null;
-        return numberId + (-1 * shouldDecrement);
-    }
-    return null;
+    const prefix = node.dataset.prefix || '';
+    const suffix = node.dataset.suffix || '';
+    node.textContent = `${prefix}${value}${suffix}`;
+});
+
+export {
+    changeClassVisibility,
+    showContent,
+    useAttrAsContent,
+    addContentToClass
 };

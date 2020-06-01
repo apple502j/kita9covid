@@ -1,4 +1,3 @@
-/*
 Copyright 2020 apple502j
 
 Redistribution and use in source and binary forms, with or without
@@ -25,21 +24,3 @@ OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
 LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
 OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 OF THE POSSIBILITY OF SUCH DAMAGE.
-*/
-export default stringId => {
-    let id = stringId;
-    let shouldDecrement = false;
-    if (typeof stringId === 'undefined') {
-        const url = new URL(location.href);
-        id = url.searchParams.get("id");
-    } else {
-        // stringId is 1-indexed
-        shouldDecrement = true;
-    }
-    if (id) {
-        const numberId = parseInt(id);
-        if (Number.isNaN(numberId) || numberId < 0) return null;
-        return numberId + (-1 * shouldDecrement);
-    }
-    return null;
-};

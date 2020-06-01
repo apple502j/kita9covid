@@ -2,6 +2,10 @@
     <head>
         <meta charset="utf-8" />
         <title>COVID-19 北九州 詳細ページ</title>
+        <!-- core-js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.6.11/core.min.js" defer></script>
+        <!-- URL.searchParams -->
+        <script src="https://unpkg.com/@ungap/url-search-params" defer></script>
         <script type="module" src="./details.js"></script>
         <style>
             [hidden] {
@@ -38,5 +42,12 @@
             <ul class="map_touched_by"></ul>
             <p class="no_touched_by" hidden data-none="発症前接触患者なし" data-default="発症前接触患者不明"></p>
         </div>
+        <footer>
+            <p>
+                <a href="./index.html">戻る</a>
+                <a href="./credits.html">クレジット</a>
+            </p>
+            <p>このウェブサイトは暇人が趣味で作ったもので、北九州市の公式のものではありません。問い合わせは @apple502j on GitHubまで</p>
+        </footer>
     </body>
 </html>

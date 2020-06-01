@@ -26,20 +26,29 @@ LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
 OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-export default stringId => {
-    let id = stringId;
-    let shouldDecrement = false;
-    if (typeof stringId === 'undefined') {
-        const url = new URL(location.href);
-        id = url.searchParams.get("id");
-    } else {
-        // stringId is 1-indexed
-        shouldDecrement = true;
-    }
-    if (id) {
-        const numberId = parseInt(id);
-        if (Number.isNaN(numberId) || numberId < 0) return null;
-        return numberId + (-1 * shouldDecrement);
-    }
-    return null;
-};
+import fetchJSON from './lib/fetch-json.js';
+import getId from './lib/get-id.js';
+import {changeClassVisibility, useAttrAsContent, addContentToClass} from './lib/dom-helper.js';
+
+const showError = () => useAttrAsContent('error', 'error');
+const hideError = () => useAttrAsContent('error', 'normal');
+
+document.getElementById('showButton').addEventListener('click', () => {
+    const val = document.getElementById('patientID').value;
+    const id = getId(val);
+    changeClassVisibility('info', true);
+    if (id === null) return showError();
+    fetchJSON('./info').then(patientsInfo => {
+        hideError();
+        const data = patientsInfo[id];
+        if (!data) return showError();
+        changeClassVisibility('info', false);
+        addContentToClass('insert_id', id + 1);
+        addContentToClass('insert_age', data.approx_age);
+        addContentToClass('insert_location', data.location);
+        addContentToClass('insert_job', data.job);
+        addContentToClass('insert_gender', data.gender);
+
+        document.getElementById('showDetailsLink').href = `./details.html?id=${id}`;
+    });
+});
