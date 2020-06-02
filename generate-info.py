@@ -18,7 +18,7 @@ HAS_LEFT_HOSPITAL = "患者_退院済フラグ"
 
 AGE_BELOW_TEN = {"0歳児", "10歳未満"}
 
-REGEX = re.compile("(?:福岡|山口)県(?:北九州市)?")
+REGEX = re.compile("(?:福岡|山口|大分|佐賀)県(?:北九州市)?")
 
 citynames = set()
 touched_dict = {}

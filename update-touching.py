@@ -13,7 +13,7 @@ with open("./docs/info.json", "r", encoding="utf-8") as f:
     info = json.load(f)
 
 try:
-    touching = info[pid]["touching"].copy()
+    touching = (info[pid]["touching"] or []).copy()
 except KeyError:
     print("ID does not exist", file=sys.stderr)
     sys.exit(1)
